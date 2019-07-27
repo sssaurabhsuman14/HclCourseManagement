@@ -26,18 +26,17 @@ public class TraineeController {
 	@Autowired
 	TrainingRequestService trainingRequestService;
 
-	@PostMapping("/request/{userId}/{courseId}")
-	public ResponseEntity<ResponseData> requestTraining(@PathVariable(value="userId") Long userId, @PathVariable(value="courseId") Long courseId) throws ApplicationException{
+	@PostMapping("/request/{userId}/{courseId}/{trainerId}")
+	public ResponseEntity<ResponseData> requestTraining(@PathVariable(value="userId") Long userId, @PathVariable(value="courseId") Long courseId, @PathVariable(value="trainerId") Long trainerId) {
 
 		Map<Integer, String> map = new HashMap();
 		map.put(202, "Request created for course");
-		TrainingRequestModel trainingRequestModel  = trainingRequestService.createRequest(userId, courseId);
+		TrainingRequestModel trainingRequestModel  = trainingRequestService.createRequest(userId, courseId, trainerId);
 		ResponseData response = new ResponseData("Request created for the training. "+courseId+" ", map, trainingRequestModel);
 		if(ObjectUtils.isEmpty(trainingRequestModel)) {
 			return new ResponseEntity<ResponseData>(response, HttpStatus.OK);	
 		}
-		else {
-			throw new ApplicationException("Error while creating request.", null);
-		}
+		return null;
+		
 	}
 }

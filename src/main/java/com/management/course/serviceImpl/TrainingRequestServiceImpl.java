@@ -24,8 +24,9 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 	@Autowired
 	TrainingRequestRepository trainingRequestRepository;
 
-	public TrainingRequestModel createRequest(Long userId, Long courseId) throws ApplicationException {
+	public TrainingRequestModel createRequest(Long userId, Long courseId, Long trainerId)  {
 		TrainingRequest trainingRequest = new TrainingRequest();
+		TrainingRequestModel trainingRequestModel = new TrainingRequestModel();
 
 		if(!ObjectUtils.isEmpty(userId) && !ObjectUtils.isEmpty(courseId)) {
 
@@ -33,16 +34,14 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 			trainingRequest.setStatus("Pending");
 			trainingRequest.setTimeSlot("");
 			trainingRequest.setTraineeId(userId);
-			//trainingRequest.setTrainerId();
+			trainingRequest.setTrainerId(trainerId);
 			//trainingRequest.setTrainingRequestId(trainingRequestId);
 			trainingRequestRepository.save(trainingRequest);
 
-			TrainingRequestModel trainingRequestModel = new TrainingRequestModel();
 			BeanUtils.copyProperties(trainingRequest, trainingRequestModel);
 			return trainingRequestModel;
-		} else {
-			throw new ApplicationException("", null);
 		}
+		return trainingRequestModel;
 	}
 
 	@Override
