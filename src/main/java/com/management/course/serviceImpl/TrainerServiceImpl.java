@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.management.course.entity.TrainingRequest;
+import com.management.course.exception.ApplicationException;
 import com.management.course.model.TrainerModel;
 import com.management.course.model.TrainingRequestModel;
 import com.management.course.service.TrainerService;
@@ -53,9 +54,10 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public List<TrainingRequest> getAllPendingRequest(Long trainerId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TrainingRequestModel> getAllPendingRequest(Long trainerId) throws ApplicationException 
+	{
+		return trainingRequestService.getAllPendingRequestByTrainerId(trainerId);
+		
 	}
 
 }

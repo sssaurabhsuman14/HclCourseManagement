@@ -1,8 +1,9 @@
 package com.management.course.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import com.management.course.entity.TrainingRequest;
+import com.management.course.exception.ApplicationException;
 import com.management.course.model.TrainingRequestModel;
 import com.management.course.repository.TrainingRequestRepository;
 import com.management.course.service.TrainingRequestService;
@@ -49,11 +51,7 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 		return null;
 	}
 
-	@Override
-	public List<TrainingRequestModel> getAll(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public TrainingRequestModel updateTrainingRequest(TrainingRequestModel model) throws Exception {
@@ -77,6 +75,37 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 		return null;
 	}
 
-	
+
+	@Override
+	public List<TrainingRequestModel> getAllPendingRequestByTrainerId(Long trainerId) throws ApplicationException {
+		List<TrainingRequestModel> requestModelList = new ArrayList<>();
+		List<TrainingRequest> requestList = new ArrayList<>();
+		Optional<List<TrainingRequest>> findByTrainerIdOptional = trainingRequestRepository.findByTrainerIdAndStatus(trainerId, "PENDING");
+		
+		boolean isOptionalPresent = findByTrainerIdOptional.isPresent();
+		if(isOptionalPresent)
+		{
+			requestList = findByTrainerIdOptional.get();
+			requestModelList = mappingModelToEntityList(requestList, requestModelList);
+		}
+		else
+		{
+			throw new ApplicationException("No Pending Request found", null);
+		}
+		return requestModelList;
+	}
+
+	private List<TrainingRequestModel> mappingModelToEntityList(List<TrainingRequest> requestList,
+			List<TrainingRequestModel> requestModelList) 
+	{
+		
+		for(TrainingRequest request: requestList)
+		{
+			TrainingRequestModel requestModel = new TrainingRequestModel();
+			BeanUtils.copyProperties(request, requestModel);
+			requestModelList.add(requestModel);
+		}
+		return requestModelList;
+	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.management.course.entity.TrainingRequest;
+import com.management.course.exception.ApplicationException;
 import com.management.course.model.ResponseData;
 import com.management.course.model.TrainingRequestModel;
 import com.management.course.service.TrainerService;
@@ -41,8 +42,10 @@ public class TrainerController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ResponseData> showAllPendingRequest(@PathVariable("id") Long trainerId) {
-		List<TrainingRequest> pendingRequestList = trainerService.getAllPendingRequest(trainerId);
+
+	public ResponseEntity<ResponseData> showAllPendingRequest(@PathVariable("id") Long trainerId) throws ApplicationException
+	{
+		List<TrainingRequestModel> pendingRequestList = trainerService.getAllPendingRequest(trainerId);
 		Map<Integer, String> status = new HashMap<>();
 		status.put(200, "SUCCESS");
 		ResponseData response = new ResponseData("Hi, Requests for Approval", status, pendingRequestList);

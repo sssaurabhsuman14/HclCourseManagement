@@ -24,8 +24,8 @@ public class Trainer implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "trainee_id", nullable=false)
-	private Long traineeId;
+	@Column(name = "trainer_id", nullable=false)
+	private Long trainerId;
 	
 	@Column(name = "name", nullable=false)
 	private String traineeName;
