@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.management.course.entity.TrainingRequest;
 import com.management.course.model.TrainerModel;
 import com.management.course.model.TrainingRequestModel;
 
@@ -17,4 +18,5 @@ public interface TrainerService {
 	public TrainerModel deleteTrainer(TrainerModel model);
 	
 	public TrainingRequestModel updateTrainingRequestModelByTrainer(TrainingRequestModel model);
+	public List<TrainingRequest> getAllPendingRequest(Long trainerId);
 }
