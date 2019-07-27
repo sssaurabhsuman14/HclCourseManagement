@@ -48,7 +48,7 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public TrainingRequestModel updateTrainingRequestModelByTrainer(TrainingRequestModel model) {
+	public TrainingRequestModel updateTrainingRequestModelByTrainer(TrainingRequestModel model) throws Exception {
 		trainingRequestService.updateTrainingRequest(model);
 		
 		return null;

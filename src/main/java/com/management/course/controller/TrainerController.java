@@ -30,8 +30,13 @@ public class TrainerController {
 
 	
 	@PostMapping
-	public ResponseEntity<ResponseData> updateTrainerAction(@RequestBody TrainingRequestModel model ){
-		trainerService.updateTrainingRequestModelByTrainer(model);
+	public ResponseEntity<ResponseData> updateTrainerAction(@RequestBody TrainingRequestModel model ) throws Exception{
+		if(model != null) {
+			
+			TrainingRequestModel entityModel = trainerService.updateTrainingRequestModelByTrainer(model);
+		}
+		
+		
 		
 		
 		return null;

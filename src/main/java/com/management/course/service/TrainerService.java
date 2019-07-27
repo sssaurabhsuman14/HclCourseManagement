@@ -17,6 +17,6 @@ public interface TrainerService {
 	public TrainerModel updateTrainer(TrainerModel model);
 	public TrainerModel deleteTrainer(TrainerModel model);
 	
-	public TrainingRequestModel updateTrainingRequestModelByTrainer(TrainingRequestModel model);
 	public List<TrainingRequest> getAllPendingRequest(Long trainerId);
+	public TrainingRequestModel updateTrainingRequestModelByTrainer(TrainingRequestModel model) throws Exception;
 }

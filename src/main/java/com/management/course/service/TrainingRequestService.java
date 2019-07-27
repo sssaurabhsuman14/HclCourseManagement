@@ -12,7 +12,7 @@ public interface TrainingRequestService {
 	public TrainingRequestModel createTrainingRequest(TrainingRequestModel model);
 	public TrainingRequestModel getTrainingRequest(Long id);
 	public List<TrainingRequestModel> getAll(Long id);
-	public TrainingRequestModel updateTrainingRequest(TrainingRequestModel model);
+	public TrainingRequestModel updateTrainingRequest(TrainingRequestModel model) throws Exception;
 	public TrainingRequestModel deleteTrainingRequest(TrainingRequestModel model);
 
 }
