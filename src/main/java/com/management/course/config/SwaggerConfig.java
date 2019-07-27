@@ -1,4 +1,4 @@
-package com.management.config;
+package com.management.course.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
