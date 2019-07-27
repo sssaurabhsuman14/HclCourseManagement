@@ -54,18 +54,18 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 
 	@Override
 	public TrainingRequestModel updateTrainingRequest(TrainingRequestModel model) throws Exception {
-		
+		TrainingRequest request= new TrainingRequest();
 		if(model != null) {
 			TrainingRequest entity = new TrainingRequest();
 			BeanUtils.copyProperties(model, entity );
-			trainingRequestRepository.save(entity);
+			request = trainingRequestRepository.save(entity);
 		}else {
 			throw new Exception("TrainingRequest Entity not saved ... Please try later !!! ");
 		}
 		
 		
-		
-		return null;
+		BeanUtils.copyProperties(request, model);
+		return model;
 	}
 
 	@Override

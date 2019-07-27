@@ -3,11 +3,9 @@ package com.management.course.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.omg.CORBA.portable.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.management.course.entity.TrainingRequest;
 import com.management.course.model.ResponseData;
-import com.management.course.model.TrainingRequestModel;
-import com.management.course.service.TraineeService;
 import com.management.course.service.TrainingRequestService;
 
 
@@ -33,6 +29,7 @@ public class TraineeController {
 		Map<Integer, String> map = new HashMap();
 		map.put(202, "Request created for course");
 		TrainingRequest trainingRequestModel  = trainingRequestService.createRequest(userId, courseId, trainerId);
+	
 		ResponseData response = new ResponseData("Request created for the training. "+courseId+" ", map, trainingRequestModel);
 		return new ResponseEntity<ResponseData>(response, HttpStatus.OK);	
 		
