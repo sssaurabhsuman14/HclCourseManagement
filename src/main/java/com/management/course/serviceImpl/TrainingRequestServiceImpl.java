@@ -24,7 +24,7 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 	@Autowired
 	TrainingRequestRepository trainingRequestRepository;
 
-	public TrainingRequestModel createRequest(Long userId, Long courseId, Long trainerId)  {
+	public TrainingRequest createRequest(Long userId, Long courseId, Long trainerId)  {
 		TrainingRequest trainingRequest = new TrainingRequest();
 		TrainingRequestModel trainingRequestModel = new TrainingRequestModel();
 
@@ -39,9 +39,9 @@ public class TrainingRequestServiceImpl implements TrainingRequestService {
 			trainingRequestRepository.save(trainingRequest);
 
 			BeanUtils.copyProperties(trainingRequest, trainingRequestModel);
-			return trainingRequestModel;
+			return trainingRequest;
 		}
-		return trainingRequestModel;
+		return trainingRequest;
 	}
 
 	@Override
